@@ -33,27 +33,36 @@ namespace ProjectionTest {
         private Shape cursor;
         private List<System.Windows.Controls.MenuItem> colorsMenus = new List<System.Windows.Controls.MenuItem>();
         private List<StackPanel> binders = new List<StackPanel>();
-
+        private int _selectedBinderIndex = 0;
         private int selectedBinderIndex {
-            get { return selectedBinderIndex; }
+            get { return _selectedBinderIndex; }
             set {
                 try{
-                    if (imagefullscreen)
-                        if (value == 0)
-                            value++; ;
-                    StackPanel temp = (StackPanel)Binder.Children[value];
-                    temp.Background = defaultColorBrush;
-                    StackPanel old = (StackPanel)Binder.Children[selectedBinderIndex];
-                    old.Background = new SolidColorBrush(Colors.White);
+                    if (value == 0 && value == _selectedBinderIndex) {
+                        _selectedBinderIndex = value;
+                    } else {
 
-                    if (!fullscreen)
-                        FullscreenButton_Click(null, null);
-                    Image img = (Image)temp.Children[0];
-                    EventImage.Source = img.Source;
-                    EventImage.Visibility = Visibility.Visible;
-                    imagefullscreen = true;
+                        int actualBinderIndex = value % Binder.Children.Count;
+                        if (actualBinderIndex == 0) {
+                            if (value > _selectedBinderIndex) actualBinderIndex++;
+                            else actualBinderIndex--;
+                        }
+                        if (actualBinderIndex < 0) actualBinderIndex = Binder.Children.Count - 1;
 
-                    this.selectedBinderIndex = value;
+                        StackPanel temp = (StackPanel)Binder.Children[actualBinderIndex];
+                        temp.Background = defaultColorBrush;
+                        StackPanel old = (StackPanel)Binder.Children[selectedBinderIndex];
+                        old.Background = new SolidColorBrush(Colors.White);
+
+                        if (!fullscreen)
+                            FullscreenButton_Click(null, null);
+                        Image img = (Image)temp.Children[0];
+                        EventImage.Source = img.Source;
+                        EventImage.Visibility = Visibility.Visible;
+                        imagefullscreen = true;
+                        Console.WriteLine("value: " + value + " binder: " + actualBinderIndex);
+                        _selectedBinderIndex = actualBinderIndex;
+                    }
                 } catch {
 
                 }
@@ -322,7 +331,7 @@ namespace ProjectionTest {
                 i.UriSource = new Uri(@"pack://application:,,,/ProjectionTest;component/Images/fullscreenout.png");
                 i.EndInit();
                 this.FullScreenImage.Source = i;
-                this.Topmost = true;
+                //this.Topmost = true;
                 fullscreen = true;
                 this.UpperDock.Visibility = Visibility.Collapsed;
                 this.BottomDock.Visibility = Visibility.Collapsed;
@@ -458,7 +467,8 @@ namespace ProjectionTest {
             i.UriSource = new Uri(path);
             i.EndInit();
             Image image = new Image() { Source = i, Height = 100, Width= 153,
-                Stretch = Stretch.Fill, HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch };
+                Stretch = Stretch.Fill, HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
+                Margin = new Thickness(5,5,5,5)};
 
             panel.Children.Add(image);
             panel.Children.Add(new System.Windows.Controls.Label() { Content = "Key Bind: " + panel.Name, FontSize = 16,
