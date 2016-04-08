@@ -127,7 +127,7 @@
 
     <DockPanel x:Name="MainDock" LastChildFill="True">
         <Grid x:Name="UpperDock" VerticalAlignment="Top" DockPanel.Dock="Top" >
-            <Rectangle x:Name="DragRectangle" Fill="#FFB4BDF5" Height="20" VerticalAlignment="Top" MouseDown="DragRectangle_MouseDown" Margin="0" Initialized="DragRectangle_Initialized"/>
+            <Rectangle x:Name="DragRectangle" Fill="#FFB4BDF5" Height="20" VerticalAlignment="Top" MouseDown="DragRectangle_MouseDown" Margin="0"/>
             <Button x:Name="CloseButton" Content="X" Margin="0" VerticalAlignment="Top" Width="30" BorderBrush="{x:Null}" Foreground="#FFF7F5FD" Background="Red" Padding="0" HorizontalAlignment="Right" FontWeight="Medium" FontStretch="Expanded" BorderThickness="0" Style="{DynamicResource ButtonSelectedStyle}" Height="20" FontSize="14" ClipToBounds="True" ClickMode="Press" Click="CloseButton_Click"/>
             <Grid Margin="0,0,30,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="31">
                 <Button x:Name="Maximize" Style="{DynamicResource ButtonSelectedStyle}" Padding="-1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF3141A8" BorderBrush="{x:Null}" Margin="0" Width="31" UseLayoutRounding="False" BorderThickness="0" Click="Maximize_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

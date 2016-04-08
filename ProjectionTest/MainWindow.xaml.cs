@@ -21,7 +21,8 @@ using Xceed.Wpf.Toolkit;
 
 namespace ProjectionTest {
     public partial class MainWindow : Window {
-
+      
+        #region Variables
         private Rect fullScreenDetection;
         private DoubleAnimation fadein = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(120));
         private DoubleAnimation fadein2 = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(60));
@@ -37,6 +38,11 @@ namespace ProjectionTest {
         private int selectedBinderIndex {
             get { return _selectedBinderIndex; }
             set {
+                /* Esse setter funciona como um event handler. 
+                 * Ele é responsável por guiar a seleção do usuario 
+                 * ao utilizar as setas para trocar de mapa
+                 */
+
                 try{
                     if (value == 0 && value == _selectedBinderIndex) {
                         _selectedBinderIndex = value;
@@ -68,12 +74,14 @@ namespace ProjectionTest {
                 }
             }
         }
+
         private bool shapeSelected = true;
         private bool fullscreen;
         private bool imagefullscreen = false;
         private SolidColorBrush defaultColorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFB4BDF5"));
-        
+        #endregion
 
+        #region Construtor
         public MainWindow() {
             InitializeComponent();
 
@@ -84,6 +92,9 @@ namespace ProjectionTest {
             List<ColorItem> temp = new List<ColorItem>();
 
             FullScreenSizeLabel.Content = (int)EventsGrid.ActualWidth + "x" + (int)EventsGrid.ActualHeight;
+
+
+            //Adicionando as devidas cores a paleta padrão da biblioteca Xceed
 
             temp.Add(new ColorItem(Colors.Red, "Red"));
             temp.Add(new ColorItem(Colors.Black, "Black"));
@@ -102,6 +113,9 @@ namespace ProjectionTest {
             ColorPicker.AvailableColorsHeader = "Recommended Colors";
             FullscreenColorPicker.AvailableColors = palette;
             FullscreenColorPicker.AvailableColorsHeader = "Recommended Colors";
+
+
+            //Populando o Menu Item com as cores pré-definidas (As mesmas da paleta)
 
             System.Windows.Controls.MenuItem white = new System.Windows.Controls.MenuItem();
             white.Header = "White";
@@ -125,8 +139,75 @@ namespace ProjectionTest {
                 ColorsMenuItem.Items.Add(m);
             }
         }
+        #endregion
 
+        #region Handlers
+
+        #region Fullscreen Handlers
+
+        private void FullscreenButton_Click(object sender, RoutedEventArgs e) {
+        // Principal método para maximizar a tela 
+            if (!fullscreen) {
+                this.EventsGrid.Margin = new Thickness(0, 0, 0, 0);
+                this.WindowState = System.Windows.WindowState.Maximized;
+                FullscreenButton.Margin = new Thickness(0, 0, 15, 95);
+                BitmapImage i = new BitmapImage();
+                i.BeginInit();
+                i.UriSource = new Uri(@"pack://application:,,,/ProjectionTest;component/Images/fullscreenout.png");
+                i.EndInit();
+                this.FullScreenImage.Source = i;
+                // Se o programa estiver bugando, desative a opção abaixo
+                this.Topmost = true;
+                fullscreen = true;
+                this.UpperDock.Visibility = Visibility.Collapsed;
+                this.BottomDock.Visibility = Visibility.Collapsed;
+                LeftDockGrid.Visibility = Visibility.Collapsed;
+                Grid.SetColumn(RightDockGrid, 0);
+                MainWindowView_SizeChanged(sender, null);
+            } else {
+                this.EventsGrid.Margin = new Thickness(10, 15, 10, 10);
+                this.WindowState = System.Windows.WindowState.Normal;
+                FullscreenButton.Margin = new Thickness(0, 0, 15, 65);
+                BitmapImage i = new BitmapImage();
+                i.BeginInit();
+                i.UriSource = new Uri(@"pack://application:,,,/ProjectionTest;component/Images/fullscreenin.png");
+                i.EndInit();
+                this.FullScreenImage.Source = i;
+                this.Topmost = false;
+                fullscreen = false;
+                this.UpperDock.Visibility = Visibility.Visible;
+                this.BottomDock.Visibility = Visibility.Visible;
+                LeftDockGrid.Visibility = Visibility.Visible;
+                Grid.SetColumn(RightDockGrid, 3);
+                TurnOffAllFullscreenControls();
+                EventImage.Visibility = Visibility.Collapsed;
+            }
+        }
+        //Estes métodos facilitam sua vida ao maximizar a tela
+        //foram necessários devido ao layout da página
+        private void TurnOnControl(System.Windows.Controls.Control c) {
+            c.Visibility = Visibility.Visible;
+            c.BeginAnimation(Image.OpacityProperty, fadein2);
+            c.Opacity = 100;
+        }
+        private void TurnOnControl(System.Windows.Controls.Control[] controls) {
+            foreach (System.Windows.Controls.Control c in controls) {
+                c.Visibility = Visibility.Visible;
+                c.BeginAnimation(Image.OpacityProperty, fadein2);
+                c.Opacity = 100;
+            }
+        }
+        private void TurnOffAllFullscreenControls() {
+            System.Windows.Controls.Control[] controls = {  FullscreenButton, FullscreenClearButton, FullscreenColorPicker, FullscreenSaveButton,
+                                                            FullscreenSizeSlider, FullscreenUndoButton, FullscreenLabel, FullScreenSizeLabel };
+            foreach (System.Windows.Controls.Control c in controls) { c.Visibility = Visibility.Hidden; }
+        }
+        #endregion
+
+        #region EventsGrid Handlers
         private void EventsGrid_MouseMove(object sender, System.Windows.Input.MouseEventArgs e) {
+            //Lida com a aparencia do cursor e com a detecção da posição do mouse a fim de tornar a barra de ferramentas 
+            //inferior (da tela) quando esta em tela cheia
             if (EventsGrid.Children.Contains(cursor)) EventsGrid.Children.Remove(cursor);
 
             if (shapeSelected) cursor = new Ellipse();
@@ -164,26 +245,8 @@ namespace ProjectionTest {
 
             EventsGrid.Children.Add(cursor);
         }
-
-        private void TurnOnControl(System.Windows.Controls.Control c) {
-            c.Visibility = Visibility.Visible;
-            c.BeginAnimation(Image.OpacityProperty, fadein2);
-            c.Opacity = 100;
-        }
-        private void TurnOnControl(System.Windows.Controls.Control[] controls) {
-            foreach (System.Windows.Controls.Control c in controls) {
-                c.Visibility = Visibility.Visible;
-                c.BeginAnimation(Image.OpacityProperty, fadein2);
-                c.Opacity = 100;
-            }
-        }
-        private void TurnOffAllFullscreenControls() {
-            System.Windows.Controls.Control[] controls = {  FullscreenButton, FullscreenClearButton, FullscreenColorPicker, FullscreenSaveButton,
-                                                            FullscreenSizeSlider, FullscreenUndoButton, FullscreenLabel, FullScreenSizeLabel };
-            foreach (System.Windows.Controls.Control c in controls) { c.Visibility = Visibility.Hidden; }
-        }
-
         private void EventsGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+            //Insere o circulo ou retangulo no canvas
             Shape temp;
             if (shapeSelected) temp = new Ellipse();
             else temp = new Rectangle();
@@ -195,18 +258,15 @@ namespace ProjectionTest {
             temp.BeginAnimation(Image.OpacityProperty, fadein);
             EventsGrid.Children.Add(temp);
         }
-
-        private void DragRectangle_MouseDown(object sender, MouseButtonEventArgs e) {
-            if (e.ChangedButton == MouseButton.Left) {
-                this.DragMove();
-            }
+        private void EventsGrid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e) {
+            //Remove o cursor customizado quando o mouse sai do Canvas
+            EventsGrid.Children.Remove(cursor);
         }
+        #endregion
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e) {
-            this.Close();
-        }
-
+        #region KeyHandling
         private void MainWindowView_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) {
+            //Insere a tecla pressionada na lista de tecla pressionadas e chama o método de verificação
             if (pressedKeys.Contains(e.Key))
                 return;
 //            if (pressedKeys.Count > 2)
@@ -217,12 +277,14 @@ namespace ProjectionTest {
         }
 
         private void MainWindowView_KeyUp(object sender, System.Windows.Input.KeyEventArgs e) {
+            //Remove a tecla pressionada na lista de tecla pressionadas e chama o método de verificação
             pressedKeys.Remove(e.Key);
             KeyCommands(sender, e);
             e.Handled = true;
         }
 
         private void KeyCommands(object sender, System.Windows.Input.KeyEventArgs e) {
+            //Confere as teclas pressionadas para designar a função de cada uma, caso elas tenham sido pressionadas
             if(Binder.Children.Count > 1){
                 if (pressedKeys.Contains(Key.Left)) {
                     selectedBinderIndex--;
@@ -243,31 +305,19 @@ namespace ProjectionTest {
             else if ((pressedKeys.Contains(Key.LeftAlt) || pressedKeys.Contains(Key.RightAlt)) && pressedKeys.Contains(Key.Enter))
                 FullscreenButton_Click(sender, e);
         }
+        #endregion
 
+        #region MainButtons Handlers
         private void ClearButton_Click(object sender, RoutedEventArgs e) {
+            //Limpa o canvas
             this.EventsGrid.Children.Clear();
         }
         private void UndoButton_Click(object sender, RoutedEventArgs e) {
+            //Retira o ultimo controle inserido no canvas
             if (EventsGrid.Children.Count > 0) EventsGrid.Children.RemoveAt(EventsGrid.Children.Count - 1);
         }
-
-        private void CreateSaveBitmap(Canvas canvas, string filename) {
-            RenderTargetBitmap renderBitmap = new RenderTargetBitmap(
-             (int)canvas.ActualWidth, (int)canvas.ActualHeight,
-             96d, 96d, PixelFormats.Default);
-            canvas.Measure(new Size(canvas.ActualWidth, canvas.ActualHeight));
-            renderBitmap.Render(canvas);
-
-            var encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
-
-            using (var file = File.Create(filename)) {
-                encoder.Save(file);
-            }
-        }
-
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
-
+            //Lança o SaveFileDialog para salvar a imagem 
             var dialog = new System.Windows.Forms.SaveFileDialog();
             dialog.Filter = "Image File | *.png";
             dialog.DefaultExt = "png";
@@ -282,19 +332,23 @@ namespace ProjectionTest {
                 System.Windows.MessageBox.Show("Image couldn't be created", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void CreateSaveBitmap(Canvas canvas, string filename) {
+            //Renderiza o Canvas e salva o arquivo no local especificado
+            RenderTargetBitmap renderBitmap = new RenderTargetBitmap(
+             (int)canvas.ActualWidth, (int)canvas.ActualHeight,
+             96d, 96d, PixelFormats.Default);
+            canvas.Measure(new Size(canvas.ActualWidth, canvas.ActualHeight));
+            renderBitmap.Render(canvas);
 
-        private void EventsGrid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e) {
-            EventsGrid.Children.Remove(cursor);
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
+
+            using (var file = File.Create(filename)) {
+                encoder.Save(file);
+            }
         }
-
-        private void MainWindowView_SizeChanged(object sender, SizeChangedEventArgs e) {
-            SizeInfoLabel.Content = (int)EventsGrid.ActualWidth + "x" + (int)EventsGrid.ActualHeight;
-            FullScreenSizeLabel.Content = (int)EventsGrid.ActualWidth + "x" + ((int)EventsGrid.ActualHeight + (int)60);
-            //EventImage.Width = EventsGrid.ActualWidth;
-            //EventImage.Height = EventsGrid.ActualHeight + 60;
-        }
-
         private void SizeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            //Ocorre toda vez que o valor do Raio é alterado e lança métodos para alterar o tamanho selecionado nos menu itens
             if ((int)e.NewValue > 45 && (int)e.NewValue < 55) s50MenuItem_Click(new object(), new RoutedEventArgs());
             else if ((int)e.NewValue > 95 && (int)e.NewValue < 105) s100MenuItem_Click(new object(), new RoutedEventArgs());
             else if ((int)e.NewValue > 145 && (int)e.NewValue < 155) s150MenuItem_Click(new object(), new RoutedEventArgs());
@@ -302,63 +356,8 @@ namespace ProjectionTest {
             radius = e.NewValue;
             e.Handled = true;
         }
-
-        private void Maximize_Click(object sender, RoutedEventArgs e) {
-            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-            this.WindowState = System.Windows.WindowState.Maximized;
-            this.MaxHeight = double.PositiveInfinity;
-            this.Maximize.Visibility = Visibility.Collapsed;
-            this.Restore.Visibility = Visibility.Visible;
-        }
-
-        private void Restore_Click(object sender, RoutedEventArgs e) {
-            this.WindowState = System.Windows.WindowState.Normal;
-            this.Restore.Visibility = Visibility.Collapsed;
-            this.Maximize.Visibility = Visibility.Visible;
-        }
-
-        private void MinimizeButton_Click(object sender, RoutedEventArgs e) {
-            this.WindowState = System.Windows.WindowState.Minimized;
-        }
-
-        private void FullscreenButton_Click(object sender, RoutedEventArgs e) {
-            if (!fullscreen) {
-                this.EventsGrid.Margin = new Thickness(0, 0, 0, 0);
-                this.WindowState = System.Windows.WindowState.Maximized;
-                FullscreenButton.Margin = new Thickness(0, 0, 15, 95);
-                BitmapImage i = new BitmapImage();
-                i.BeginInit();
-                i.UriSource = new Uri(@"pack://application:,,,/ProjectionTest;component/Images/fullscreenout.png");
-                i.EndInit();
-                this.FullScreenImage.Source = i;
-                //this.Topmost = true;
-                fullscreen = true;
-                this.UpperDock.Visibility = Visibility.Collapsed;
-                this.BottomDock.Visibility = Visibility.Collapsed;
-                LeftDockGrid.Visibility = Visibility.Collapsed;
-                Grid.SetColumn(RightDockGrid, 0);
-                MainWindowView_SizeChanged(sender, null);
-            } else {
-                this.EventsGrid.Margin = new Thickness(10, 15, 10, 10);
-                this.WindowState = System.Windows.WindowState.Normal;
-                FullscreenButton.Margin = new Thickness(0, 0, 15, 65);
-                BitmapImage i = new BitmapImage();
-                i.BeginInit();
-                i.UriSource = new Uri(@"pack://application:,,,/ProjectionTest;component/Images/fullscreenin.png");
-                i.EndInit();
-                this.FullScreenImage.Source = i;
-                this.Topmost = false;
-                fullscreen = false;
-                this.UpperDock.Visibility = Visibility.Visible;
-                this.BottomDock.Visibility = Visibility.Visible;
-                LeftDockGrid.Visibility = Visibility.Visible;
-                Grid.SetColumn(RightDockGrid, 3);
-                TurnOffAllFullscreenControls();
-                EventImage.Visibility = Visibility.Collapsed;
-            }
-        }
-
         private void ColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e) {
+            //Handler do ColorPicker, para alterar a cor do controle a ser inserido
             actualBrush = new SolidColorBrush(e.NewValue.Value);
             Rectangle temp = new Rectangle();
             foreach (System.Windows.Controls.MenuItem m in colorsMenus) {
@@ -367,7 +366,58 @@ namespace ProjectionTest {
                 else m.IsChecked = true;
             }
         }
+        private void ColorSelected(object sender, RoutedEventArgs e) {
+            //Também altera a cor do controle a ser inserido, porém este é um handler genérico
+            System.Windows.Controls.MenuItem temp = (System.Windows.Controls.MenuItem)sender;
+            Color color = new Color();
+            foreach (ColorItem c in palette) {
+                if (temp.Header.ToString() == c.Name) color = (Color)c.Color;
+                else if (temp.Header.ToString() == "White") color = Colors.White;
+            }
+            actualBrush = new SolidColorBrush(color);
+            ColorPicker.SelectedColor = actualBrush.Color;
+            foreach (System.Windows.Controls.MenuItem m in colorsMenus) {
+                if (m.Header != temp.Header) m.IsChecked = false;
+                else m.IsChecked = true;
+            }
+        }
+        #endregion
 
+        #region WindowButtons Handlers
+        //Métodos genéricos utilizados devido a customização dos botões padrão do windows
+        private void MainWindowView_SizeChanged(object sender, SizeChangedEventArgs e) {
+            SizeInfoLabel.Content = (int)EventsGrid.ActualWidth + "x" + (int)EventsGrid.ActualHeight;
+            FullScreenSizeLabel.Content = (int)EventsGrid.ActualWidth + "x" + ((int)EventsGrid.ActualHeight + (int)60);
+            //EventImage.Width = EventsGrid.ActualWidth;
+            //EventImage.Height = EventsGrid.ActualHeight + 60;
+        }
+        private void DragRectangle_MouseDown(object sender, MouseButtonEventArgs e) {
+            if (e.ChangedButton == MouseButton.Left) {
+                this.DragMove();
+            }
+        }
+        private void CloseButton_Click(object sender, RoutedEventArgs e) {
+            this.Close();
+        }
+        private void Maximize_Click(object sender, RoutedEventArgs e) {
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            this.WindowState = System.Windows.WindowState.Maximized;
+            this.MaxHeight = double.PositiveInfinity;
+            this.Maximize.Visibility = Visibility.Collapsed;
+            this.Restore.Visibility = Visibility.Visible;
+        }
+        private void Restore_Click(object sender, RoutedEventArgs e) {
+            this.WindowState = System.Windows.WindowState.Normal;
+            this.Restore.Visibility = Visibility.Collapsed;
+            this.Maximize.Visibility = Visibility.Visible;
+        }
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e) {
+            this.WindowState = System.Windows.WindowState.Minimized;
+        }
+        #endregion
+        
+        #region MenuItem Handlers
+        //Handlers para os MenuItens do ContextMenu
         private void CircleMenuItem_Click(object sender, RoutedEventArgs e) {
             CircleMenuItem.IsChecked = true;
             SquareMenuItem.IsChecked = false;
@@ -410,22 +460,11 @@ namespace ProjectionTest {
             radius = 200;
             SizeSlider.Value = 200;
         }
-        private void ColorSelected(object sender, RoutedEventArgs e) {
-            System.Windows.Controls.MenuItem temp = (System.Windows.Controls.MenuItem)sender;
-            Color color = new Color();
-            foreach (ColorItem c in palette) {
-                if (temp.Header.ToString() == c.Name) color = (Color)c.Color;
-                else if (temp.Header.ToString() == "White") color = Colors.White;
-            }
-            actualBrush = new SolidColorBrush(color);
-            ColorPicker.SelectedColor = actualBrush.Color;
-            foreach (System.Windows.Controls.MenuItem m in colorsMenus) {
-                if (m.Header != temp.Header) m.IsChecked = false;
-                else m.IsChecked = true;
-            }
-        }
+        #endregion
 
+        #region Binder Management
         private void CreateNewBinder() {
+            //Seleciona a imagem padrão do novo StackPanel que será o Binder (ainda vou alterar esse nome)
             OpenFileDialog oFD = new OpenFileDialog();
             oFD.Filter = "PNG Image File | *.png";
             oFD.DefaultExt = "png";
@@ -442,6 +481,7 @@ namespace ProjectionTest {
             pressedKeys.Clear();
         }
         private void CreateNewBinder(int index) {
+            //Override para inserir o novo binder em uma posição especifica (ainda será utilizado)
             OpenFileDialog oFD = new OpenFileDialog();
             oFD.Filter = "PNG Image File | *.png";
             oFD.DefaultExt = "png";
@@ -457,8 +497,8 @@ namespace ProjectionTest {
                 return;
             pressedKeys.Clear();
         }
-
         private StackPanel RawBinder(string path, int button) {
+            //Retorna um Binder com os padrões necessários
             StackPanel panel = new StackPanel() { Name = "NumPad" + button, Orientation = System.Windows.Controls.Orientation.Horizontal,
                                                   Margin = new Thickness(5, 5, 5, 0), HorizontalAlignment= System.Windows.HorizontalAlignment.Stretch,
                                                   VerticalAlignment = VerticalAlignment.Stretch};
@@ -478,8 +518,8 @@ namespace ProjectionTest {
 
             return panel;
         }
-
-        void panel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+        private void panel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            //Handler genérico para os binder gerados programáticamente
             if (!fullscreen)
                 FullscreenButton_Click(null, null);
             StackPanel p = (StackPanel)sender;
@@ -489,15 +529,13 @@ namespace ProjectionTest {
             selectedBinderIndex = Binder.Children.IndexOf(p);
             imagefullscreen = true;
         }
-
         private void RootBind_MouseDown(object sender, MouseButtonEventArgs e) {
+            //Handler do primeiro Binder
             CreateNewBinder();
         }
+        #endregion
 
-        private void DragRectangle_Initialized(object sender, EventArgs e) {
-
-            selectedBinderIndex = 0;
-        }
+        #endregion
     }
 }
 
