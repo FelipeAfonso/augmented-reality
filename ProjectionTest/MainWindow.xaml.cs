@@ -75,16 +75,20 @@ namespace ProjectionTest {
             }
         }
 
-        private bool shapeSelected = true;
+        private int shapeSelected = 1;
         private bool fullscreen;
         private bool imagefullscreen = false;
+        private bool texboxSelected = false;
+        private FontFamily fontFamily;
+        private float fontSize=12;
+        private System.Windows.Controls.TextBox selectedTB;
         private SolidColorBrush defaultColorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFB4BDF5"));
         #endregion
 
         #region Construtor
         public MainWindow() {
             InitializeComponent();
-
+            
             Console.WriteLine("Binder: " + Binder.Children.ToString());
 
             fullscreen = false;
@@ -92,6 +96,7 @@ namespace ProjectionTest {
             List<ColorItem> temp = new List<ColorItem>();
 
             FullScreenSizeLabel.Content = (int)EventsGrid.ActualWidth + "x" + (int)EventsGrid.ActualHeight;
+            fontFamily = new FontFamily("Segoe UI");
 
 
             //Adicionando as devidas cores a paleta padrão da biblioteca Xceed
@@ -134,6 +139,7 @@ namespace ProjectionTest {
                 m.IsCheckable = true;
                 Rectangle Icon = new Rectangle();
                 Icon.Fill = new SolidColorBrush((Color)c.Color);
+                Icon.Height = 16; Icon.Width = 16;
                 m.Icon = Icon;
                 colorsMenus.Add(m);
                 ColorsMenuItem.Items.Add(m);
@@ -209,9 +215,11 @@ namespace ProjectionTest {
             //Lida com a aparencia do cursor e com a detecção da posição do mouse a fim de tornar a barra de ferramentas 
             //inferior (da tela) quando esta em tela cheia
             if (EventsGrid.Children.Contains(cursor)) EventsGrid.Children.Remove(cursor);
-
-            if (shapeSelected) cursor = new Ellipse();
-            else cursor = new Rectangle();
+            if (shapeSelected == 1){ cursor = new Ellipse(); EventsGrid.Cursor = System.Windows.Input.Cursors.None; }
+            else if (shapeSelected == 0){ cursor = new Rectangle(); EventsGrid.Cursor = System.Windows.Input.Cursors.None; }
+            else {
+                EventsGrid.Cursor = System.Windows.Input.Cursors.IBeam;
+            }
 
             if (cursor.Width != radius * 2) {
                 cursor.Width = radius * 2;
@@ -242,45 +250,78 @@ namespace ProjectionTest {
             } else {
                 TurnOffAllFullscreenControls();
             }
-
-            EventsGrid.Children.Add(cursor);
+            if(shapeSelected < 2) EventsGrid.Children.Add(cursor);
         }
         private void EventsGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-            //Insere o circulo ou retangulo no canvas
-            Shape temp;
-            if (shapeSelected) temp = new Ellipse();
-            else temp = new Rectangle();
-            temp.Width = radius * 2;
-            temp.Height = radius * 2;
-            temp.Margin = new Thickness(e.GetPosition(EventsGrid).X - radius, e.GetPosition(EventsGrid).Y - radius, 0, 0);
-            temp.Fill = actualBrush;
-            temp.Opacity = 0;
-            temp.BeginAnimation(Image.OpacityProperty, fadein);
-            EventsGrid.Children.Add(temp);
+            if (texboxSelected) { selectedTB.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous)); Keyboard.ClearFocus(); texboxSelected = false; selectedTB = null; } else {
+                if (shapeSelected == 2) {
+                    System.Windows.Controls.TextBox input = new System.Windows.Controls.TextBox();
+                    input.Background = null;
+                    input.SelectionBrush = Brushes.White;
+                    input.BorderBrush = null;
+                    input.Foreground = actualBrush;
+                    input.FontFamily = fontFamily;
+                    input.FontSize = fontSize;
+                    input.TextWrapping = TextWrapping.Wrap;
+                    input.Margin = new Thickness(e.GetPosition(EventsGrid).X, e.GetPosition(EventsGrid).Y, 0, 0);
+                    input.GotFocus += TextBoxSelected;
+                    input.LostFocus += TextBoxUnselected;
+                    EventsGrid.Children.Add(input);
+                    this.Focus();
+                    input.Focus();
+                } else {
+                    //Insere o circulo ou retangulo no canvas
+                    Shape temp;
+                    if (shapeSelected == 1) temp = new Ellipse();
+                    else temp = new Rectangle();
+                    temp.Width = radius * 2;
+                    temp.Height = radius * 2;
+                    temp.Margin = new Thickness(e.GetPosition(EventsGrid).X - radius, e.GetPosition(EventsGrid).Y - radius, 0, 0);
+                    temp.Fill = actualBrush;
+                    temp.Opacity = 0;
+                    temp.BeginAnimation(Image.OpacityProperty, fadein);
+                    EventsGrid.Children.Add(temp);
+                }
+            }
         }
+        private void EventsGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+        }
+    
         private void EventsGrid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e) {
             //Remove o cursor customizado quando o mouse sai do Canvas
             EventsGrid.Children.Remove(cursor);
+        }
+        private void TextBoxSelected(object sender, RoutedEventArgs e) {
+            selectedTB = (System.Windows.Controls.TextBox)sender;
+            texboxSelected = true;
+        }
+        private void TextBoxUnselected(object sender, RoutedEventArgs e) {
+            selectedTB = null;
+            texboxSelected = false;
         }
         #endregion
 
         #region KeyHandling
         private void MainWindowView_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) {
             //Insere a tecla pressionada na lista de tecla pressionadas e chama o método de verificação
-            if (pressedKeys.Contains(e.Key))
-                return;
-//            if (pressedKeys.Count > 2)
-//                pressedKeys.Clear();
-            pressedKeys.Add(e.Key);
-            KeyCommands(sender, e);
-            e.Handled = true;
+            if (!texboxSelected){
+                if (pressedKeys.Contains(e.Key))
+                    return;
+                //            if (pressedKeys.Count > 2)
+                //                pressedKeys.Clear();
+                pressedKeys.Add(e.Key);
+                KeyCommands(sender, e);
+                e.Handled = true;
+            }
         }
 
         private void MainWindowView_KeyUp(object sender, System.Windows.Input.KeyEventArgs e) {
             //Remove a tecla pressionada na lista de tecla pressionadas e chama o método de verificação
-            pressedKeys.Remove(e.Key);
-            KeyCommands(sender, e);
-            e.Handled = true;
+            if (!texboxSelected) {
+                pressedKeys.Remove(e.Key);
+                KeyCommands(sender, e);
+                e.Handled = true;
+            }
         }
 
         private void KeyCommands(object sender, System.Windows.Input.KeyEventArgs e) {
@@ -304,6 +345,13 @@ namespace ProjectionTest {
                 SaveButton_Click(sender, e);
             else if ((pressedKeys.Contains(Key.LeftAlt) || pressedKeys.Contains(Key.RightAlt)) && pressedKeys.Contains(Key.Enter))
                 FullscreenButton_Click(sender, e);
+        }
+        private void MainWindowView_TextInput(object sender, TextCompositionEventArgs e) {
+            if (texboxSelected) {
+                Char keyChar = (Char)System.Text.Encoding.ASCII.GetBytes(e.Text)[0];
+                selectedTB.Text += keyChar;
+                selectedTB.Width += 10;
+            }
         }
         #endregion
 
@@ -419,16 +467,28 @@ namespace ProjectionTest {
         #region MenuItem Handlers
         //Handlers para os MenuItens do ContextMenu
         private void CircleMenuItem_Click(object sender, RoutedEventArgs e) {
+            if (texboxSelected) { selectedTB.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous)); Keyboard.ClearFocus(); texboxSelected = false; selectedTB = null; } 
             CircleMenuItem.IsChecked = true;
             SquareMenuItem.IsChecked = false;
-            shapeSelected = true;
+            TextMenuItem.IsChecked = false;
+            shapeSelected = 1;
         }
         private void SquareMenuItem_Click(object sender, RoutedEventArgs e) {
+            if (texboxSelected) { selectedTB.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous)); Keyboard.ClearFocus(); texboxSelected = false; selectedTB = null; } 
             CircleMenuItem.IsChecked = false;
             SquareMenuItem.IsChecked = true;
-            shapeSelected = false;
+            TextMenuItem.IsChecked = false;
+            shapeSelected = 0;
+        }
+        private void TextMenuItem_Click(object sender, RoutedEventArgs e) {
+            if (texboxSelected) { selectedTB.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous)); Keyboard.ClearFocus(); texboxSelected = false; selectedTB = null; } 
+            CircleMenuItem.IsChecked = false;
+            SquareMenuItem.IsChecked = false;
+            TextMenuItem.IsChecked = true;
+            shapeSelected = 2;
         }
         private void s50MenuItem_Click(object sender, RoutedEventArgs e) {
+            if (texboxSelected) { selectedTB.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous)); Keyboard.ClearFocus(); texboxSelected = false; selectedTB = null; } 
             s50MenuItem.IsChecked = true;
             s100MenuItem.IsChecked = false;
             s150MenuItem.IsChecked = false;
@@ -437,6 +497,7 @@ namespace ProjectionTest {
             SizeSlider.Value = 50;
         }
         private void s100MenuItem_Click(object sender, RoutedEventArgs e) {
+            if (texboxSelected) { selectedTB.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous)); Keyboard.ClearFocus(); texboxSelected = false; selectedTB = null; } 
             s50MenuItem.IsChecked = false;
             s100MenuItem.IsChecked = true;
             s150MenuItem.IsChecked = false;
@@ -445,6 +506,7 @@ namespace ProjectionTest {
             SizeSlider.Value = 100;
         }
         private void s150MenuItem_Click(object sender, RoutedEventArgs e) {
+            if (texboxSelected) { selectedTB.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous)); Keyboard.ClearFocus(); texboxSelected = false; selectedTB = null; } 
             s50MenuItem.IsChecked = false;
             s100MenuItem.IsChecked = false;
             s150MenuItem.IsChecked = true;
@@ -453,12 +515,22 @@ namespace ProjectionTest {
             SizeSlider.Value = 150;
         }
         private void s200MenuItem_Click(object sender, RoutedEventArgs e) {
+            if (texboxSelected) { selectedTB.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous)); Keyboard.ClearFocus(); texboxSelected = false; selectedTB = null; } 
             s50MenuItem.IsChecked = false;
             s100MenuItem.IsChecked = false;
             s150MenuItem.IsChecked = false;
             s200MenuItem.IsChecked = true;
             radius = 200;
             SizeSlider.Value = 200;
+        }
+        private void FontSizeMenuItem_Click(object sender, RoutedEventArgs e) {
+            FontDialog fontDialog = new FontDialog();
+            DialogResult result = fontDialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK) {
+                System.Drawing.Font font = fontDialog.Font;
+                fontFamily = new FontFamily(font.FontFamily.Name);
+                fontSize = font.Size;
+            }
         }
         #endregion
 
@@ -535,7 +607,10 @@ namespace ProjectionTest {
         }
         #endregion
 
+
+
         #endregion
+        
     }
 }
 
