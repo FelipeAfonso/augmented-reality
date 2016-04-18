@@ -74,12 +74,12 @@
             <MenuItem Header="Shapes">
                 <MenuItem x:Name="CircleMenuItem" Header="Circle" IsCheckable="True" IsChecked="True" Click="CircleMenuItem_Click">
                     <MenuItem.Icon>
-                        <Ellipse Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FF3141A8" Visibility="Visible"/>
+                        <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FF3141A8" Visibility="Visible" Width="16" Height="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem x:Name="SquareMenuItem" Header="Square" IsCheckable="True" IsChecked="False" Click="SquareMenuItem_Click">
                     <MenuItem.Icon>
-                        <Rectangle Fill="#FF3141A8" Visibility="Visible"/>
+                        <Rectangle Fill="#FF3141A8" Visibility="Visible" Width="16" Height="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
@@ -88,6 +88,7 @@
                         <TextBlock Text="T" FontFamily="Times New Roman" FontWeight="Bold" FontSize="13.333" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem x:Name="FontSizeMenuItem" Header="Font" Click="FontSizeMenuItem_Click"/>
             </MenuItem>
             <MenuItem Header="Size">
                 <MenuItem x:Name="s50MenuItem" Header="100px" IsCheckable="True" IsChecked="True" Click="s50MenuItem_Click"/>
