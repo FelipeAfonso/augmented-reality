@@ -189,7 +189,7 @@
                     <StackPanel x:Name="Binder" CanVerticallyScroll="True">
                         <StackPanel x:Name="RootBind" Margin="5,5,5,0" Orientation="Horizontal" MouseDown="RootBind_MouseDown" Background="#FFB4BDF5">
                             <Image x:Name="image" Height="100" Source="Images/black.png" Stretch="Fill" Width="153" Margin="5"/>
-                            <Label x:Name="label2" Content="Click here to &#xA;assign a Key Bind" Margin="0" VerticalContentAlignment="Center" FontSize="16"/>
+                            <Label x:Name="label2" Content="Click here to &#xA;assign a Binder" Margin="0" VerticalContentAlignment="Center" FontSize="16"/>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -210,7 +210,7 @@
                     <Button x:Name="FullscreenSaveButton" Content="Save" HorizontalAlignment="Right" Margin="0,0,95,45" Style="{DynamicResource ButtonFullscreenStyle}" VerticalAlignment="Bottom" Background="#FF3141A8" Foreground="#FFEEF0FF" Width="80" RenderTransformOrigin="0.5,0.5" Height="35" Click="SaveButton_Click" ToolTip="Save Map (Ctrl + S)" Visibility="Hidden"/>
                     <Button x:Name="FullscreenUndoButton" Content="Undo" HorizontalAlignment="Left" Margin="10,0,0,45" Style="{DynamicResource ButtonFullscreenStyle}" VerticalAlignment="Bottom" Background="#FF3141A8" Foreground="#FFEEF0FF" Width="80" RenderTransformOrigin="0.5,0.5" Height="35" Click="UndoButton_Click" ToolTip="Undo (Ctrl+Z)" BorderBrush="{x:Null}" Visibility="Hidden"/>
                     <xctk:ColorPicker x:Name="FullscreenColorPicker" Margin="0,0,330,45" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="98" Height="35" Background="#003141A8" DisplayColorAndName="True" SelectedColorChanged="ColorPicker_SelectedColorChanged" StandardColorsHeader="" SelectedColor="White" Padding="2" BorderBrush="White" Foreground="White" Visibility="Hidden"/>
-                    <Slider x:Name="FullscreenSizeSlider" HorizontalAlignment="Right" Margin="0,0,180,52" VerticalAlignment="Bottom" Width="145" Height="19" Foreground="White" BorderBrush="White" Background="#003141A8" Maximum="200" TickFrequency="5" Minimum="10" Value="50" AutoToolTipPlacement="TopLeft" ValueChanged="SizeSlider_ValueChanged" Visibility="Hidden" IsHitTestVisible="False" BorderThickness="0,0,0,45" />
+                    <Slider x:Name="FullscreenSizeSlider" HorizontalAlignment="Right" Margin="0,0,180,52" VerticalAlignment="Bottom" Width="145" Height="19" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Maximum="200" TickFrequency="5" Minimum="10" Value="50" AutoToolTipPlacement="TopLeft" ValueChanged="SizeSlider_ValueChanged" SmallChange="1" />
                     <Label x:Name="FullscreenLabel" Content="Sphere Radius" HorizontalAlignment="Right" Margin="0,0,180,71" VerticalAlignment="Bottom" Height="14" Width="145" VerticalContentAlignment="Center" FontSize="9.333" Padding="0" HorizontalContentAlignment="Center" Foreground="White" Background="{x:Null}" Visibility="Hidden" BorderThickness="0,0,0,45"/>
                 </Grid>
             </Grid>

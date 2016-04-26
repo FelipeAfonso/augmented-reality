@@ -88,6 +88,8 @@ namespace ProjectionTest {
         #region Construtor
         public MainWindow() {
             InitializeComponent();
+
+            Maximize_Click(null, null);
             
             Console.WriteLine("Binder: " + Binder.Children.ToString());
 
@@ -262,6 +264,7 @@ namespace ProjectionTest {
                     input.Foreground = actualBrush;
                     input.FontFamily = fontFamily;
                     input.FontSize = fontSize;
+                    input.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
                     input.TextWrapping = TextWrapping.Wrap;
                     input.Margin = new Thickness(e.GetPosition(EventsGrid).X, e.GetPosition(EventsGrid).Y, 0, 0);
                     input.GotFocus += TextBoxSelected;
@@ -326,7 +329,8 @@ namespace ProjectionTest {
 
         private void KeyCommands(object sender, System.Windows.Input.KeyEventArgs e) {
             //Confere as teclas pressionadas para designar a função de cada uma, caso elas tenham sido pressionadas
-            if(Binder.Children.Count > 1){
+            if (texboxSelected) { selectedTB.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous)); Keyboard.ClearFocus(); texboxSelected = false; selectedTB = null; }
+            if (Binder.Children.Count > 1){
                 if (pressedKeys.Contains(Key.Left)) {
                     selectedBinderIndex--;
                 } else if (pressedKeys.Contains(Key.Right)) {
@@ -606,8 +610,6 @@ namespace ProjectionTest {
             CreateNewBinder();
         }
         #endregion
-
-
 
         #endregion
         
