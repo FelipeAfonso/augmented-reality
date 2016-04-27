@@ -18,15 +18,20 @@ using System.Windows.Threading;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using Xceed.Wpf.Toolkit;
+using System.Xml;
+using Microsoft.VisualBasic;
 
 namespace ProjectionTest {
     public partial class MainWindow : Window {
       
         #region Variables
         private Rect fullScreenDetection;
-        private DoubleAnimation fadein = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(120));
+        private DoubleAnimation fadein = new DoubleAnimation() {
+            To = 100, From=0, BeginTime= TimeSpan.FromSeconds(120), Duration= TimeSpan.FromSeconds(50),
+            FillBehavior = FillBehavior.Stop
+        };
         private DoubleAnimation fadein2 = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(60));
-        private DoubleAnimation fadeout = new DoubleAnimation(100, 0, TimeSpan.FromSeconds(60));
+        private DoubleAnimation fadeout = new DoubleAnimation(100, 0, TimeSpan.FromSeconds(120));
         private double radius = 50;
         private SolidColorBrush actualBrush = new SolidColorBrush(Colors.White);
         private ObservableCollection<ColorItem> palette;
@@ -89,8 +94,8 @@ namespace ProjectionTest {
         public MainWindow() {
             InitializeComponent();
 
-            Maximize_Click(null, null);
-            
+            fadein.Completed += (s, a) => EventImage.Opacity = 100;
+
             Console.WriteLine("Binder: " + Binder.Children.ToString());
 
             fullscreen = false;
@@ -173,6 +178,7 @@ namespace ProjectionTest {
                 Grid.SetColumn(RightDockGrid, 0);
                 MainWindowView_SizeChanged(sender, null);
             } else {
+                imagefullscreen = false;
                 this.EventsGrid.Margin = new Thickness(10, 15, 10, 10);
                 this.WindowState = System.Windows.WindowState.Normal;
                 FullscreenButton.Margin = new Thickness(0, 0, 15, 65);
@@ -264,7 +270,6 @@ namespace ProjectionTest {
                     input.Foreground = actualBrush;
                     input.FontFamily = fontFamily;
                     input.FontSize = fontSize;
-                    input.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
                     input.TextWrapping = TextWrapping.Wrap;
                     input.Margin = new Thickness(e.GetPosition(EventsGrid).X, e.GetPosition(EventsGrid).Y, 0, 0);
                     input.GotFocus += TextBoxSelected;
@@ -329,17 +334,24 @@ namespace ProjectionTest {
 
         private void KeyCommands(object sender, System.Windows.Input.KeyEventArgs e) {
             //Confere as teclas pressionadas para designar a função de cada uma, caso elas tenham sido pressionadas
-            if (texboxSelected) { selectedTB.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous)); Keyboard.ClearFocus(); texboxSelected = false; selectedTB = null; }
-            if (Binder.Children.Count > 1){
+            if(Binder.Children.Count > 1){
                 if (pressedKeys.Contains(Key.Left)) {
+                    BinderImageAnimate();
                     selectedBinderIndex--;
                 } else if (pressedKeys.Contains(Key.Right)) {
+                    BinderImageAnimate();
                     selectedBinderIndex++;
                 }
             }
             if (pressedKeys.Contains(Key.Space)) ClearButton_Click(sender, e);
             else if (pressedKeys.Contains(Key.OemPlus)) radius += 25;
             else if (pressedKeys.Contains(Key.OemMinus)) { if (radius > 25) radius -= 25; }
+            else if (pressedKeys.Contains(Key.Enter)) {
+                if (imagefullscreen) {
+                    AnimateImage.Fill = Brushes.White;
+                    EventImage.BeginAnimation(Image.OpacityProperty, new DoubleAnimation(0, 100, TimeSpan.FromSeconds(120)));
+                }
+            }
             else if (pressedKeys.Contains(Key.Escape)) FullscreenButton_Click(sender, e);
             else if ((pressedKeys.Contains(Key.LeftCtrl) && pressedKeys.Contains(Key.Z)) ||
                         (pressedKeys.Contains(Key.RightCtrl) && pressedKeys.Contains(Key.Z)))
@@ -371,17 +383,55 @@ namespace ProjectionTest {
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
             //Lança o SaveFileDialog para salvar a imagem 
             var dialog = new System.Windows.Forms.SaveFileDialog();
-            dialog.Filter = "Image File | *.png";
+            dialog.Filter = "Image File (.png)| *.png|Augmented Reality Map (.arm)|*.arm";
             dialog.DefaultExt = "png";
             dialog.Title = "Save Image as:";
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             try {
                 if (result == System.Windows.Forms.DialogResult.OK) {
-                    CreateSaveBitmap(EventsGrid, dialog.FileName);
-                    System.Windows.MessageBox.Show("Image successfully created", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                    if (dialog.FileName.Substring(dialog.FileName.Length - 4).Equals(".png")) {
+                        CreateSaveBitmap(EventsGrid, dialog.FileName);
+                        System.Windows.MessageBox.Show("Image successfully created", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }else if (dialog.FileName.Substring(dialog.FileName.Length - 4).Equals(".arm")) {
+                        using (XmlWriter writer = XmlWriter.Create(dialog.FileName, new XmlWriterSettings() { Indent = true })) {
+                            writer.WriteStartDocument();
+                            writer.WriteStartElement("Map");
+
+                            writer.WriteElementString("Name", Interaction.InputBox("Map Name", "Save Image as: ", 
+                                dialog.FileName.Substring(dialog.FileName.LastIndexOf('\\') + 1)
+                                .Substring(0,dialog.FileName.Substring(dialog.FileName.LastIndexOf('\\') + 1).Length - 4)));
+
+                            writer.WriteElementString("Created_Date", DateTime.Now.ToString());
+                            writer.WriteStartElement("Controls");
+                            foreach (FrameworkElement c in EventsGrid.Children) {
+                                writer.WriteStartElement("Control");
+                                writer.WriteElementString("Type", c.GetType().ToString());
+                                if (c.GetType().ToString() == "System.Windows.Controls.TextBox") {
+                                    System.Windows.Controls.TextBox tb = (System.Windows.Controls.TextBox)c;
+                                    writer.WriteElementString("Content", tb.Text);
+                                    writer.WriteElementString("Color", tb.Foreground.ToString());
+                                    writer.WriteElementString("MarginLeft", tb.Margin.Left.ToString());
+                                    writer.WriteElementString("MarginTop", tb.Margin.Top.ToString());
+                                    writer.WriteElementString("FontSize", tb.FontSize.ToString());
+                                    writer.WriteElementString("FontFamily", tb.FontFamily.ToString());
+                                } else {
+                                    Shape shape = (Shape)c;
+                                    writer.WriteElementString("Radius", Convert.ToString(shape.Width / 2));
+                                    writer.WriteElementString("MarginLeft", shape.Margin.Left.ToString());
+                                    writer.WriteElementString("MarginTop", shape.Margin.Top.ToString());
+                                    writer.WriteElementString("Fill", shape.Fill.ToString());
+                                }
+                                writer.WriteEndElement();
+                            }
+                            writer.WriteEndElement();
+                            writer.WriteEndElement();
+                            writer.WriteEndDocument();
+                        }
+                    }
+
                 }
             } catch {
-                System.Windows.MessageBox.Show("Image couldn't be created", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Map couldn't be created", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void CreateSaveBitmap(Canvas canvas, string filename) {
@@ -529,6 +579,8 @@ namespace ProjectionTest {
         }
         private void FontSizeMenuItem_Click(object sender, RoutedEventArgs e) {
             FontDialog fontDialog = new FontDialog();
+            fontDialog.AllowVectorFonts = true;
+            fontDialog.AllowVerticalFonts = true;
             DialogResult result = fontDialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK) {
                 System.Drawing.Font font = fontDialog.Font;
@@ -541,7 +593,7 @@ namespace ProjectionTest {
         #region Binder Management
         private void CreateNewBinder() {
             //Seleciona a imagem padrão do novo StackPanel que será o Binder (ainda vou alterar esse nome)
-            OpenFileDialog oFD = new OpenFileDialog();
+            OpenFileDialog oFD = new OpenFileDialog() { Multiselect = true };
             oFD.Filter = "PNG Image File | *.png";
             oFD.DefaultExt = "png";
             oFD.Title = "Open File";
@@ -551,14 +603,20 @@ namespace ProjectionTest {
                     StackPanel temp = RawBinder(oFD.FileName, Binder.Children.Count);
                     Binder.Children.Add(temp);
                     binders.Add(temp);
-                } 
+                } else {
+                    foreach (string f in oFD.FileNames) {
+                        StackPanel temp = RawBinder(f, Binder.Children.Count);
+                        Binder.Children.Add(temp);
+                        binders.Add(temp);
+                    }
+                }
             } else
                 return;
             pressedKeys.Clear();
         }
         private void CreateNewBinder(int index) {
             //Override para inserir o novo binder em uma posição especifica (ainda será utilizado)
-            OpenFileDialog oFD = new OpenFileDialog();
+            OpenFileDialog oFD = new OpenFileDialog() { Multiselect = true };
             oFD.Filter = "PNG Image File | *.png";
             oFD.DefaultExt = "png";
             oFD.Title = "Open File";
@@ -568,6 +626,12 @@ namespace ProjectionTest {
                     StackPanel temp = RawBinder(oFD.FileName, Binder.Children.Count);
                     Binder.Children.Add(temp);
                     binders.Insert(index, temp);
+                } else {
+                    foreach(string f in oFD.FileNames) {
+                        StackPanel temp = RawBinder(f, Binder.Children.Count);
+                        Binder.Children.Add(temp);
+                        binders.Insert(index, temp);
+                    }
                 }
             } else
                 return;
@@ -609,10 +673,20 @@ namespace ProjectionTest {
             //Handler do primeiro Binder
             CreateNewBinder();
         }
+        private void BinderImageAnimate() {
+            if (imagefullscreen) {
+                AnimateImage.Fill = Brushes.Black;
+                EventImage.BeginAnimation(Image.OpacityProperty, new DoubleAnimation(0, 100, TimeSpan.FromSeconds(120)));
+            }
+        }
+
         #endregion
+
+
 
         #endregion
         
     }
 }
+
 
