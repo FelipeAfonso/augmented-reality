@@ -137,12 +137,12 @@
             <Rectangle x:Name="DragRectangle" Fill="#FFB4BDF5" Height="20" VerticalAlignment="Top" MouseDown="DragRectangle_MouseDown" Margin="0"/>
             <Button x:Name="CloseButton" Content="X" Margin="0" VerticalAlignment="Top" Width="30" BorderBrush="{x:Null}" Foreground="#FFF7F5FD" Background="Red" Padding="0" HorizontalAlignment="Right" FontWeight="Medium" FontStretch="Expanded" BorderThickness="0" Style="{DynamicResource ButtonSelectedStyle}" Height="20" FontSize="14" ClipToBounds="True" ClickMode="Press" Click="CloseButton_Click"/>
             <Grid Margin="0,0,30,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="31">
-                <Button x:Name="Maximize" Style="{DynamicResource ButtonSelectedStyle}" Padding="-1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF3141A8" BorderBrush="{x:Null}" Margin="0" Width="31" UseLayoutRounding="False" BorderThickness="0" Click="Maximize_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button x:Name="Maximize" Style="{DynamicResource ButtonSelectedStyle}" Padding="-1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF3141A8" BorderBrush="{x:Null}" Margin="0" Width="31" UseLayoutRounding="False" BorderThickness="0" Click="Maximize_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
                     <Grid Width="30" Height="20">
                         <Path Data="M0,1 L9,1 L9,8 L0,8 Z" Width="9" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="2" Stroke="White"  />
                     </Grid>
                 </Button>
-                <Button x:Name="Restore" Style="{DynamicResource ButtonSelectedStyle}"  Background="#FF3141A8" Padding="0" BorderBrush="{x:Null}" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Restore_Click" Width="31" Height="20" Margin="0" Visibility="Collapsed">
+                <Button x:Name="Restore" Style="{DynamicResource ButtonSelectedStyle}"  Background="#FF3141A8" Padding="0" BorderBrush="{x:Null}" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Restore_Click" Width="31" Height="20" Margin="0">
                     <Grid Width="30" Height="19" UseLayoutRounding="True" RenderTransform="1,0,0,1,.5,.5">
                         <Path Data="M2,0 L8,0 L8,6 M0,3 L6,3 M0,2 L6,2 L6,8 L0,8 Z" Width="8" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="1" Stroke="White"  />
                     </Grid>

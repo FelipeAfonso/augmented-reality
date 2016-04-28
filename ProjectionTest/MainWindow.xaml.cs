@@ -94,6 +94,8 @@ namespace ProjectionTest {
         public MainWindow() {
             InitializeComponent();
 
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
             fadein.Completed += (s, a) => EventImage.Opacity = 100;
 
             Console.WriteLine("Binder: " + Binder.Children.ToString());
@@ -161,7 +163,14 @@ namespace ProjectionTest {
         private void FullscreenButton_Click(object sender, RoutedEventArgs e) {
         // Principal método para maximizar a tela 
             if (!fullscreen) {
+                this.MaxHeight = Double.PositiveInfinity;
                 this.EventsGrid.Margin = new Thickness(0, 0, 0, 0);
+
+                //Alerta, gambiarra abaixo
+                if (this.WindowState == System.Windows.WindowState.Maximized){
+                    Restore_Click(null, null);
+                }
+
                 this.WindowState = System.Windows.WindowState.Maximized;
                 FullscreenButton.Margin = new Thickness(0, 0, 15, 95);
                 BitmapImage i = new BitmapImage();
@@ -178,6 +187,7 @@ namespace ProjectionTest {
                 Grid.SetColumn(RightDockGrid, 0);
                 MainWindowView_SizeChanged(sender, null);
             } else {
+                this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
                 imagefullscreen = false;
                 this.EventsGrid.Margin = new Thickness(10, 15, 10, 10);
                 this.WindowState = System.Windows.WindowState.Normal;
@@ -195,6 +205,8 @@ namespace ProjectionTest {
                 Grid.SetColumn(RightDockGrid, 3);
                 TurnOffAllFullscreenControls();
                 EventImage.Visibility = Visibility.Collapsed;
+                this.Restore.Visibility = Visibility.Collapsed;
+                this.Maximize.Visibility = Visibility.Visible;
             }
         }
         //Estes métodos facilitam sua vida ao maximizar a tela
@@ -441,7 +453,6 @@ namespace ProjectionTest {
              96d, 96d, PixelFormats.Default);
             canvas.Measure(new Size(canvas.ActualWidth, canvas.ActualHeight));
             renderBitmap.Render(canvas);
-
             var encoder = new PngBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
 
@@ -504,7 +515,6 @@ namespace ProjectionTest {
         private void Maximize_Click(object sender, RoutedEventArgs e) {
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             this.WindowState = System.Windows.WindowState.Maximized;
-            this.MaxHeight = double.PositiveInfinity;
             this.Maximize.Visibility = Visibility.Collapsed;
             this.Restore.Visibility = Visibility.Visible;
         }
@@ -594,20 +604,18 @@ namespace ProjectionTest {
         private void CreateNewBinder() {
             //Seleciona a imagem padrão do novo StackPanel que será o Binder (ainda vou alterar esse nome)
             OpenFileDialog oFD = new OpenFileDialog() { Multiselect = true };
-            oFD.Filter = "PNG Image File | *.png";
+            oFD.Filter = "PNG Image File (.png)| *.png|Augmented Reality Map (.arm)| *.arm";
             oFD.DefaultExt = "png";
             oFD.Title = "Open File";
             DialogResult d = oFD.ShowDialog();
             if (d == System.Windows.Forms.DialogResult.OK) {
-                if (oFD.FileNames.Count() <= 1) {
-                    StackPanel temp = RawBinder(oFD.FileName, Binder.Children.Count);
-                    Binder.Children.Add(temp);
-                    binders.Add(temp);
-                } else {
-                    foreach (string f in oFD.FileNames) {
+                foreach (string f in oFD.FileNames) {
+                    if (f.Substring(f.Length - 4) == ".png") {
                         StackPanel temp = RawBinder(f, Binder.Children.Count);
                         Binder.Children.Add(temp);
                         binders.Add(temp);
+                    }else if(f.Substring(f.Length - 4) == ".arm") {
+
                     }
                 }
             } else
