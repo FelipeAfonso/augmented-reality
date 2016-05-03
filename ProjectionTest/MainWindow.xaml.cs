@@ -23,14 +23,14 @@ using Microsoft.VisualBasic;
 
 namespace ProjectionTest {
     public partial class MainWindow : Window {
-      
+
         #region Variables
         private Rect fullScreenDetection;
         private DoubleAnimation fadein = new DoubleAnimation() {
             To = 100, From=0, BeginTime= TimeSpan.FromSeconds(120), Duration= TimeSpan.FromSeconds(50),
             FillBehavior = FillBehavior.Stop
         };
-        private DoubleAnimation fadein2 = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(60));
+        private DoubleAnimation fadein2 = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(120));
         private DoubleAnimation fadeout = new DoubleAnimation(100, 0, TimeSpan.FromSeconds(120));
         private double radius = 50;
         private SolidColorBrush actualBrush = new SolidColorBrush(Colors.White);
@@ -67,9 +67,14 @@ namespace ProjectionTest {
 
                         if (!fullscreen)
                             FullscreenButton_Click(null, null);
-                        Image img = (Image)temp.Children[0];
-                        EventImage.Source = img.Source;
-                        EventImage.Visibility = Visibility.Visible;
+                        if (temp.Children[0].GetType().ToString() == "System.Windows.Controls.Viewbox") {
+                            EventCanvas = (Viewbox)temp.Children[0];
+                            EventCanvas.Visibility = Visibility.Visible;
+                        } else {
+                            Image i = (Image)temp.Children[0];
+                            EventImage.Source = i.Source;
+                            EventImage.Visibility = Visibility.Visible;
+                        }
                         imagefullscreen = true;
                         Console.WriteLine("value: " + value + " binder: " + actualBinderIndex);
                         _selectedBinderIndex = actualBinderIndex;
@@ -88,6 +93,9 @@ namespace ProjectionTest {
         private float fontSize=12;
         private System.Windows.Controls.TextBox selectedTB;
         private SolidColorBrush defaultColorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFB4BDF5"));
+
+        private System.Windows.WindowState previousWindowState;
+
         #endregion
 
         #region Construtor
@@ -96,7 +104,7 @@ namespace ProjectionTest {
 
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
 
-            fadein.Completed += (s, a) => EventImage.Opacity = 100;
+            fadein.Completed += (s, a) => EventImage.Opacity = 100; 
 
             Console.WriteLine("Binder: " + Binder.Children.ToString());
 
@@ -142,7 +150,7 @@ namespace ProjectionTest {
             ColorsMenuItem.Items.Add(white);
             colorsMenus.Add(white);
             foreach (ColorItem c in temp) {
-                System.Windows.Controls.MenuItem m = new System.Windows.Controls.MenuItem();
+                var m = new System.Windows.Controls.MenuItem();
                 m.Header = c.Name;
                 m.Click += ColorSelected;
                 m.IsCheckable = true;
@@ -165,7 +173,7 @@ namespace ProjectionTest {
             if (!fullscreen) {
                 this.MaxHeight = Double.PositiveInfinity;
                 this.EventsGrid.Margin = new Thickness(0, 0, 0, 0);
-
+                previousWindowState = this.WindowState;
                 //Alerta, gambiarra abaixo
                 if (this.WindowState == System.Windows.WindowState.Maximized){
                     Restore_Click(null, null);
@@ -190,7 +198,7 @@ namespace ProjectionTest {
                 this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
                 imagefullscreen = false;
                 this.EventsGrid.Margin = new Thickness(10, 15, 10, 10);
-                this.WindowState = System.Windows.WindowState.Normal;
+                this.WindowState = previousWindowState;
                 FullscreenButton.Margin = new Thickness(0, 0, 15, 65);
                 BitmapImage i = new BitmapImage();
                 i.BeginInit();
@@ -205,6 +213,7 @@ namespace ProjectionTest {
                 Grid.SetColumn(RightDockGrid, 3);
                 TurnOffAllFullscreenControls();
                 EventImage.Visibility = Visibility.Collapsed;
+                EventCanvas.Visibility = Visibility.Collapsed;
                 this.Restore.Visibility = Visibility.Collapsed;
                 this.Maximize.Visibility = Visibility.Visible;
             }
@@ -299,7 +308,7 @@ namespace ProjectionTest {
                     temp.Margin = new Thickness(e.GetPosition(EventsGrid).X - radius, e.GetPosition(EventsGrid).Y - radius, 0, 0);
                     temp.Fill = actualBrush;
                     temp.Opacity = 0;
-                    temp.BeginAnimation(Image.OpacityProperty, fadein);
+                    temp.BeginAnimation(Image.OpacityProperty, fadein2);
                     EventsGrid.Children.Add(temp);
                 }
             }
@@ -361,7 +370,9 @@ namespace ProjectionTest {
             else if (pressedKeys.Contains(Key.Enter)) {
                 if (imagefullscreen) {
                     AnimateImage.Fill = Brushes.White;
-                    EventImage.BeginAnimation(Image.OpacityProperty, new DoubleAnimation(0, 100, TimeSpan.FromSeconds(120)));
+                    DoubleAnimation anim = new DoubleAnimation(0, 100, TimeSpan.FromSeconds(120));
+                    anim.Completed += (s, a) => AnimateImage.Fill=Brushes.Black; 
+                    EventImage.BeginAnimation(Image.OpacityProperty, anim);
                 }
             }
             else if (pressedKeys.Contains(Key.Escape)) FullscreenButton_Click(sender, e);
@@ -598,6 +609,25 @@ namespace ProjectionTest {
                 fontSize = font.Size;
             }
         }
+        private void Import_Click(object sender, RoutedEventArgs e) {
+            OpenFileDialog oFD = new OpenFileDialog();
+            oFD.Filter = "PNG Image File (.png)| *.png";
+            oFD.DefaultExt = "png";
+            oFD.Title = "Import File";
+            DialogResult d = oFD.ShowDialog();
+            if (d == System.Windows.Forms.DialogResult.OK) {
+                try {
+                    BitmapImage i = new BitmapImage();
+                    i.BeginInit();
+                    i.UriSource = new Uri(oFD.FileName);
+                    i.EndInit();
+                    var img = new Image() {
+                        Source = i, Stretch = Stretch.Fill
+                    };
+                    EventsGrid.Children.Add(img);
+                } catch { }
+            }
+        }
         #endregion
 
         #region Binder Management
@@ -615,7 +645,9 @@ namespace ProjectionTest {
                         Binder.Children.Add(temp);
                         binders.Add(temp);
                     }else if(f.Substring(f.Length - 4) == ".arm") {
-
+                        StackPanel temp = ArmBinder(f, Binder.Children.Count);
+                        Binder.Children.Add(temp);
+                        binders.Add(temp);
                     }
                 }
             } else
@@ -659,22 +691,77 @@ namespace ProjectionTest {
                 Margin = new Thickness(5,5,5,5)};
 
             panel.Children.Add(image);
-            panel.Children.Add(new System.Windows.Controls.Label() { Content = "Key Bind: " + panel.Name, FontSize = 16,
-                VerticalContentAlignment =VerticalAlignment.Center });
+            panel.Children.Add(new System.Windows.Controls.Label() { Content = path.Substring(path.LastIndexOf('\\') + 1)
+                                                                    .Substring(0,path.Substring(path.LastIndexOf('\\') + 1).Length - 4)
+                                                                    , FontSize = 16
+                                                                    , VerticalContentAlignment =VerticalAlignment.Center });
+            panel.MouseLeftButtonDown += panel_MouseLeftButtonDown;
+            var delete_panel = new System.Windows.Controls.MenuItem();
+            var separator = new Separator();
+
+            panel.MouseRightButtonDown += (s, a) => {
+                delete_panel.Header = "Delete Binder";
+                delete_panel.Tag = panel;
+                delete_panel.Click += delete_panel_Click;
+                this.ContextMenu.Items.Insert(0, delete_panel);
+            };
+            this.ContextMenu.Closed += (s, a) => { this.ContextMenu.Items.Remove(delete_panel); };
+            return panel;
+        }
+        private StackPanel ArmBinder(string path, int button) {
+            StackPanel panel = new StackPanel() {
+                Name = "NumPad" + button, Orientation = System.Windows.Controls.Orientation.Horizontal,
+                Margin = new Thickness(5, 5, 5, 0), HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch
+            };
+
+            var map = new ARMap(path);
+            Canvas canvas = new Canvas() { Background = Brushes.Black };
+            foreach (FrameworkElement e in map.Elements) { canvas.Children.Add(e); }
+            Viewbox vb = new Viewbox() { Stretch = Stretch.Fill, Child = canvas, Width=153, Height=100, Margin = new Thickness(5, 5, 5, 5) };
+
+
+            panel.Children.Add(vb);
+            panel.Children.Add(new System.Windows.Controls.Label() {
+                Content = path.Substring(path.LastIndexOf('\\') + 1)
+                    .Substring(0, path.Substring(path.LastIndexOf('\\') + 1).Length - 4)
+                    ,FontSize = 16
+                    ,VerticalContentAlignment = VerticalAlignment.Center
+            });
 
             panel.MouseLeftButtonDown += panel_MouseLeftButtonDown;
+            var delete_panel = new System.Windows.Controls.MenuItem();
+            var separator = new Separator();
+            panel.MouseRightButtonDown += (s, a) => {
+                delete_panel.Header = "Delete Binder";
+                delete_panel.Tag = panel;
+                delete_panel.Click += delete_panel_Click;
+                this.ContextMenu.Items.Insert(0, delete_panel);
+            };
+            this.ContextMenu.Closed += (s, a) => { this.ContextMenu.Items.Remove(delete_panel); };
 
             return panel;
+        }
+        void delete_panel_Click(object sender, RoutedEventArgs e) {
+            var m = (System.Windows.Controls.MenuItem)sender;
+            binders.Remove((StackPanel)m.Tag);
+            Binder.Children.Remove((StackPanel)m.Tag);
         }
         private void panel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
             //Handler genérico para os binder gerados programáticamente
             if (!fullscreen)
                 FullscreenButton_Click(null, null);
             StackPanel p = (StackPanel)sender;
-            Image temp = (Image)p.Children[0];
-            EventImage.Source = temp.Source;
-            EventImage.Visibility = Visibility.Visible;
-            selectedBinderIndex = Binder.Children.IndexOf(p);
+            if (p.Children[0].GetType().ToString() == "System.Windows.Controls.Viewbox") {
+                //-->Parei aqui
+                EventCanvas = (Viewbox)p.Children[0];
+                EventCanvas.Visibility = Visibility.Visible;
+            } else {
+                Image temp = (Image)p.Children[0];
+                EventImage.Source = temp.Source;
+                EventImage.Visibility = Visibility.Visible;
+                selectedBinderIndex = Binder.Children.IndexOf(p);
+            }
             imagefullscreen = true;
         }
         private void RootBind_MouseDown(object sender, MouseButtonEventArgs e) {
@@ -689,8 +776,6 @@ namespace ProjectionTest {
         }
 
         #endregion
-
-
 
         #endregion
         

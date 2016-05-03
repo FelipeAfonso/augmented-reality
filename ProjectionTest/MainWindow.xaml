@@ -118,6 +118,7 @@
                     <Image Source="Images/clear.png" Width="16" Height="16" />
                 </MenuItem.Icon>
             </MenuItem>
+            <MenuItem Header="Import" Click="Import_Click"/>
             <MenuItem Header="Save" Click="SaveButton_Click">
                 <MenuItem.Icon>
                     <Image Source="Images/save.png" Width="16" Height="16"/>
@@ -174,6 +175,7 @@
         <Grid Margin="0">
             <Rectangle x:Name="AnimateImage" Fill="Black" Stroke="Black" Margin="0"/>
             <Image x:Name="EventImage" Stretch="Fill" Margin="0"/>
+            <Viewbox x:Name="EventCanvas" Margin="0" Visibility="Hidden" />
         </Grid>
         <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
