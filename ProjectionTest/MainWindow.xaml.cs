@@ -20,6 +20,7 @@ using System.Collections.ObjectModel;
 using Xceed.Wpf.Toolkit;
 using System.Xml;
 using Microsoft.VisualBasic;
+using System.Threading;
 
 namespace ProjectionTest {
     public partial class MainWindow : Window {
@@ -67,8 +68,8 @@ namespace ProjectionTest {
 
                         if (!fullscreen)
                             FullscreenButton_Click(null, null);
-                        if (temp.Children[0].GetType().ToString() == "System.Windows.Controls.Viewbox") {
-                            EventCanvas = (Viewbox)temp.Children[0];
+                        if (temp.Children[0].GetType().ToString() == "System.Windows.Controls.Canvas") {
+                            EventCanvas = (Canvas)temp.Children[0];
                             EventCanvas.Visibility = Visibility.Visible;
                         } else {
                             Image i = (Image)temp.Children[0];
@@ -100,7 +101,10 @@ namespace ProjectionTest {
 
         #region Construtor
         public MainWindow() {
+
             InitializeComponent();
+
+            new Thread(thread).Start();
 
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
 
@@ -718,10 +722,8 @@ namespace ProjectionTest {
             var map = new ARMap(path);
             Canvas canvas = new Canvas() { Background = Brushes.Black };
             foreach (FrameworkElement e in map.Elements) { canvas.Children.Add(e); }
-            Viewbox vb = new Viewbox() { Stretch = Stretch.Fill, Child = canvas, Width=153, Height=100, Margin = new Thickness(5, 5, 5, 5) };
 
-
-            panel.Children.Add(vb);
+            panel.Children.Add(canvas);
             panel.Children.Add(new System.Windows.Controls.Label() {
                 Content = path.Substring(path.LastIndexOf('\\') + 1)
                     .Substring(0, path.Substring(path.LastIndexOf('\\') + 1).Length - 4)
@@ -752,10 +754,25 @@ namespace ProjectionTest {
             if (!fullscreen)
                 FullscreenButton_Click(null, null);
             StackPanel p = (StackPanel)sender;
-            if (p.Children[0].GetType().ToString() == "System.Windows.Controls.Viewbox") {
-                //-->Parei aqui
-                EventCanvas = (Viewbox)p.Children[0];
-                EventCanvas.Visibility = Visibility.Visible;
+            if (p.Children[0].GetType().ToString() == "System.Windows.Controls.Canvas") {
+                Canvas tempCanvas = (Canvas)p.Children[0];
+                foreach (var element in tempCanvas.Children) {
+                    if (element.GetType().ToString() == "System.Windows.Shapes.Ellipse") {
+                        Ellipse temp = (Ellipse)element;
+                        EventCanvas.Children.Add(new Ellipse() {
+                            Width= temp.Width, Height = temp.Height,
+                            Margin=temp.Margin, Fill=temp.Fill
+                        });
+                    } else if (element.GetType().ToString() == "System.Windows.Shapes.Rectangle") {
+                        Rectangle temp = (Rectangle)element;
+                        EventCanvas.Children.Add(new Ellipse() {
+                            Width= temp.Width, Height = temp.Height,
+                            Margin=temp.Margin, Fill=temp.Fill
+                        });
+                    } else {
+
+                    }
+                }
             } else {
                 Image temp = (Image)p.Children[0];
                 EventImage.Source = temp.Source;
@@ -778,7 +795,37 @@ namespace ProjectionTest {
         #endregion
 
         #endregion
-        
+        private void thread() {
+            TCPServer.start();
+            while (true) {
+                if (TCPServer.accept()) {
+                    //try {
+                    this.Dispatcher.Invoke((Action)(() => {
+                        if (Binder.Children.Count > 1) {
+                            var temp = TCPServer.receive();
+                            if (temp == "left") {
+                            //this.Dispatcher.Invoke((Action)(() => {
+                                selectedBinderIndex--;
+                                BinderImageAnimate();
+                            //}));
+                        } else if (temp == "righ") {
+                            //this.Dispatcher.Invoke((Action)(() => {
+                                selectedBinderIndex++;
+                                BinderImageAnimate();
+                            //}));
+                        }
+                    }
+                }));
+                    //} catch {
+
+                    //}
+                }
+            }
+        }
+
+        private void MainWindowView_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            TCPServer.close();
+        }
     }
 }
 
