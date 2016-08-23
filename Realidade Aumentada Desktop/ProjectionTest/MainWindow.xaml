@@ -1,0 +1,226 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" mc:Ignorable="d" x:Name="MainWindowView" x:Class="ProjectionTest.MainWindow"
+        Title="Projection Test" Height="335" Width="850" Background="#FFEEF0FF" WindowStyle="None" KeyDown="MainWindowView_KeyDown" MinWidth="850" MinHeight="335" SizeChanged="MainWindowView_SizeChanged" KeyUp="MainWindowView_KeyUp" TextInput="MainWindowView_TextInput" WindowState="Maximized" Closing="MainWindowView_Closing">
+
+    <Window.Resources>
+        <Style x:Key="SelectedVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle  StrokeThickness="1" Stroke="LightBlue" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ButtonSelectedStyle" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{DynamicResource SelectedVisual}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="bg" BorderBrush="Transparent" Background="#FF3141A8">
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="bg" Value="#FF6271D6"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="bg" Value="#FF9AA3E2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ButtonFullscreenStyle" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{DynamicResource SelectedVisual}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="bg" BorderBrush="White" Opacity="70" Background="Transparent" BorderThickness="3">
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" TargetName="bg" Value="80"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" TargetName="bg" Value="100"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CloseButton" BasedOn="{StaticResource SelectedVisual}" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FF970000"/>
+        </Style>
+    </Window.Resources>
+
+    <Window.ContextMenu>
+        <ContextMenu Background="#FFDBDFF9" Foreground="#FF3141A8"  >
+            <MenuItem Header="Toggle Fullscreen" Click="FullscreenButton_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/fullscreen.png" Width="16" Height="16"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="FullscreenButtons" Header="Fullscreen Buttons" IsCheckable="True" IsChecked="True"/>
+            <Separator Background="White" />
+            <MenuItem Header="Shapes">
+                <MenuItem x:Name="CircleMenuItem" Header="Circle" IsCheckable="True" IsChecked="True" Click="CircleMenuItem_Click">
+                    <MenuItem.Icon>
+                        <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FF3141A8" Visibility="Visible" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="SquareMenuItem" Header="Square" IsCheckable="True" IsChecked="False" Click="SquareMenuItem_Click">
+                    <MenuItem.Icon>
+                        <Rectangle Fill="#FF3141A8" Visibility="Visible" Width="16" Height="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem x:Name="TextMenuItem" Header="Text" IsCheckable="True" IsChecked="False" Click="TextMenuItem_Click">
+                    <MenuItem.Icon>
+                        <TextBlock Text="T" FontFamily="Times New Roman" FontWeight="Bold" FontSize="13.333" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="FontSizeMenuItem" Header="Font" Click="FontSizeMenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="Size">
+                <MenuItem x:Name="s50MenuItem" Header="100px" IsCheckable="True" IsChecked="True" Click="s50MenuItem_Click"/>
+                <MenuItem x:Name="s100MenuItem" Header="200px" IsCheckable="True" IsChecked="False" Click="s100MenuItem_Click"/>
+                <MenuItem x:Name="s150MenuItem" Header="300px" IsCheckable="True" IsChecked="False" Click="s150MenuItem_Click"/>
+                <MenuItem x:Name="s200MenuItem" Header="400px" IsCheckable="True" IsChecked="False" Click="s200MenuItem_Click"/>
+            </MenuItem>
+            <MenuItem x:Name="ColorsMenuItem" Header="Colors"/>
+            <Separator Background="White" />
+
+            <!--Essa é a lenda do MenuItem mais teimoso que já fiz, por um acaso ele simplesmente não aceita o evento Click
+            portanto, não vai ter mais ele no context menu... Sim EU DESISTO!!
+            Se você for tentar corrigir ele, favor acrescentar ao numero abaixo
+            Quantidade de horas gastas nesse MenuItem: 4h
+            Boa sorte
+            
+            <MenuItem Header="Undo" Click="Undo">
+                <MenuItem.Icon>
+                    <Image Source="Images/undo.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            
+            -->
+
+            <MenuItem Header="Clear" Click="ClearButton_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/clear.png" Width="16" Height="16" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Import" Click="Import_Click"/>
+            <MenuItem Header="Save" Click="SaveButton_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/save.png" Width="16" Height="16"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator Background="White" />
+            <MenuItem Header="Close" Click="CloseButton_Click">
+                <MenuItem.Icon>
+                    <Image Source="Images/close.png" Width="16" Height="16"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </Window.ContextMenu>
+
+    <DockPanel x:Name="MainDock" LastChildFill="True">
+        <Grid x:Name="UpperDock" VerticalAlignment="Top" DockPanel.Dock="Top" >
+            <Rectangle x:Name="DragRectangle" Fill="#FFB4BDF5" Height="20" VerticalAlignment="Top" MouseDown="DragRectangle_MouseDown" Margin="0"/>
+            <Button x:Name="CloseButton" Content="X" Margin="0" VerticalAlignment="Top" Width="30" BorderBrush="{x:Null}" Foreground="#FFF7F5FD" Background="Red" Padding="0" HorizontalAlignment="Right" FontWeight="Medium" FontStretch="Expanded" BorderThickness="0" Style="{DynamicResource ButtonSelectedStyle}" Height="20" FontSize="14" ClipToBounds="True" ClickMode="Press" Click="CloseButton_Click"/>
+            <Grid Margin="0,0,30,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="31">
+                <Button x:Name="Maximize" Style="{DynamicResource ButtonSelectedStyle}" Padding="-1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF3141A8" BorderBrush="{x:Null}" Margin="0" Width="31" UseLayoutRounding="False" BorderThickness="0" Click="Maximize_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
+                    <Grid Width="30" Height="20">
+                        <Path Data="M0,1 L9,1 L9,8 L0,8 Z" Width="9" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="2" Stroke="White"  />
+                    </Grid>
+                </Button>
+                <Button x:Name="Restore" Style="{DynamicResource ButtonSelectedStyle}"  Background="#FF3141A8" Padding="0" BorderBrush="{x:Null}" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Restore_Click" Width="31" Height="20" Margin="0">
+                    <Grid Width="30" Height="19" UseLayoutRounding="True" RenderTransform="1,0,0,1,.5,.5">
+                        <Path Data="M2,0 L8,0 L8,6 M0,3 L6,3 M0,2 L6,2 L6,8 L0,8 Z" Width="8" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="1" Stroke="White"  />
+                    </Grid>
+                </Button>
+            </Grid>
+            <Button x:Name="MinimizeButton" Content="__" Margin="0,0,61,0" VerticalAlignment="Top" Width="30" BorderBrush="{x:Null}" Foreground="#FFF7F5FD" Background="#FF3141A8" Padding="0" HorizontalAlignment="Right" FontStretch="Expanded" BorderThickness="0" Style="{DynamicResource ButtonSelectedStyle}" Height="20" FontWeight="Bold" FontFamily="Comic Sans MS" FontSize="10.667" VerticalContentAlignment="Center" Click="MinimizeButton_Click" Focusable="False"/>
+            <Label Content="Augmented Reality Workspace" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Padding="0" Height="20" VerticalContentAlignment="Center" FontFamily="Segoe UI Semibold" Margin="10,0,-112,0" Foreground="#FF3141A8" RenderTransformOrigin="0.5,0.5" MouseDown="DragRectangle_MouseDown">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="-0.105"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-0.082"/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+        </Grid>
+        <Grid x:Name="BottomDock" DockPanel.Dock="Bottom" Margin="174,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="ClearButton" Content="Clear" HorizontalAlignment="Right" Style="{DynamicResource ButtonSelectedStyle}" VerticalAlignment="Bottom" Background="#FF3141A8" Foreground="#FFEEF0FF" Width="80" Click="ClearButton_Click" RenderTransformOrigin="0.5,0.5" Height="35" FocusVisualStyle="{DynamicResource SelectedVisual}" ToolTip="Clear Canvas (Space)" Margin="0,0,10,5" Focusable="False"/>
+            <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Right" Margin="0,0,95,5" Style="{DynamicResource ButtonSelectedStyle}" VerticalAlignment="Bottom" Background="#FF3141A8" Foreground="#FFEEF0FF" Width="80" RenderTransformOrigin="0.5,0.5" Height="35" Click="SaveButton_Click" ToolTip="Save Map (Ctrl + S)" Focusable="False"/>
+            <Button x:Name="UndoButton" Content="Undo" HorizontalAlignment="Right" Style="{DynamicResource ButtonSelectedStyle}" VerticalAlignment="Bottom" Background="#FF3141A8" Foreground="#FFEEF0FF" Width="80" RenderTransformOrigin="0.5,0.5" Height="35" Click="UndoButton_Click" ToolTip="Undo (Ctrl+Z)" BorderBrush="{x:Null}" Margin="0,0,433,5" Focusable="False"/>
+            <xctk:ColorPicker x:Name="ColorPicker" Margin="0,0,330,5" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="98" Height="35" Background="#FF3141A8" DisplayColorAndName="True" SelectedColorChanged="ColorPicker_SelectedColorChanged" StandardColorsHeader="" SelectedColor="White" Padding="2"/>
+            <Slider x:Name="SizeSlider" HorizontalAlignment="Right" Margin="0,0,180,7" VerticalAlignment="Bottom" Width="145" Height="19" Foreground="#FF3141A8" BorderBrush="{x:Null}" Background="#FF3141A8" Maximum="200" TickFrequency="5" Value="50" AutoToolTipPlacement="TopLeft" ValueChanged="SizeSlider_ValueChanged" SmallChange="1" />
+            <Label x:Name="label" Content="Sphere Radius" HorizontalAlignment="Right" Margin="0,0,180,26" VerticalAlignment="Bottom" Height="14" Width="145" VerticalContentAlignment="Center" FontSize="9.333" Padding="0" HorizontalContentAlignment="Center" Foreground="#FF3141A8"/>
+        </Grid>
+        <Grid x:Name="Events" Margin="0">
+            <Rectangle x:Name="AnimateImage" Fill="Black" Stroke="Black" Margin="0"/>
+            <Image x:Name="EventImage" Stretch="Fill" Margin="0"/>
+            <Canvas x:Name="EventCanvas" Margin="0" />
+        </Grid>
+        <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" MinWidth="166" MaxWidth="313" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" MinWidth="174" />
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="LeftDockGrid" Margin="0,0,-3,-40" Background="White" Width="316">
+                <Rectangle Margin="0" Stroke="#FFB4BDF5" StrokeThickness="3"/>
+                <Rectangle Height="20" Margin="0" StrokeThickness="3" VerticalAlignment="Top" Fill="#FFB4BDF5"/>
+                <Label x:Name="label1" Content="Map Binder" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Top" Height="20" Width="163" Padding="5,0,0,0" VerticalContentAlignment="Center" Foreground="#FF3141A8" FontSize="14.667" FontFamily="Segoe WP"/>
+                <ScrollViewer Margin="3,20,3,3" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" >
+                    <StackPanel x:Name="Binder" CanVerticallyScroll="True">
+                        <StackPanel x:Name="RootBind" Margin="5,5,5,0" Orientation="Horizontal" MouseDown="RootBind_MouseDown" Background="#FFB4BDF5">
+                            <Image x:Name="image" Height="100" Source="Images/black.png" Stretch="Fill" Width="153" Margin="5"/>
+                            <Label x:Name="label2" Content="Click here to &#xA;assign a Key Bind" Margin="0" VerticalContentAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <GridSplitter Grid.Row="0" Grid.Column="1" Margin="0,0,0,-40" Width="3" Background="#FFB4BDF5" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
+            <Grid x:Name="RightDockGrid" Margin="0" Grid.ColumnSpan="3" Grid.Column="2">
+                <Label x:Name="SizeInfoLabel" Content="Label" HorizontalAlignment="Left" Margin="5,0,0,0" Width="81" Height="15" Foreground="#FF3141A8" VerticalAlignment="Top" Background="{x:Null}" Padding="0"/>
+                <Label x:Name="ServerInfoLabel" Content="Servidor" HorizontalAlignment="Right" Margin="0,0,5,0" Width="81" Height="15" Foreground="#FF3141A8" VerticalAlignment="Top" Background="{x:Null}" Padding="0" HorizontalContentAlignment="Right"/>
+                <Canvas x:Name="EventsGrid" Margin="5,15" Background="Black" MouseMove="EventsGrid_MouseMove" MouseLeftButtonUp="EventsGrid_MouseLeftButtonUp" ClipToBounds="True" Cursor="None" MouseLeave="EventsGrid_MouseLeave"/>
+                <Grid x:Name="MouseDetectionUpperGrid" Height="127" VerticalAlignment="Top" Margin="5,15,5,-27">
+                    <Label x:Name="FullScreenSizeLabel" Content="Label" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Foreground="White" FontSize="21.333" Visibility="Collapsed"/>
+                </Grid>
+                <Grid x:Name="MouseDetectionGrid" Height="160" VerticalAlignment="Bottom" Margin="5,0,5,-40">
+                    <Button x:Name="FullscreenButton" Margin="0,0,15,65" Width="29" Height="29" VerticalAlignment="Bottom" HorizontalAlignment="Right" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Foreground="White" RenderTransformOrigin="1.103,1.241" Background="{x:Null}" Opacity="0" Click="FullscreenButton_Click" Focusable="False">
+                        <Image x:Name="FullScreenImage" Source="Images/fullscreenin.png" Opacity="0.9" />
+                    </Button>
+                    <Button x:Name="FullscreenClearButton" Content="Clear" HorizontalAlignment="Right" Margin="0,0,10,45" Style="{DynamicResource ButtonFullscreenStyle}" VerticalAlignment="Bottom" Background="#FF3141A8" Foreground="#FFEEF0FF" Width="80" Click="ClearButton_Click" RenderTransformOrigin="0.5,0.5" Height="35" Focusable="False" FocusVisualStyle="{DynamicResource SelectedVisual}" ToolTip="Clear Canvas (Space)" Visibility="Hidden"/>
+                    <Button x:Name="FullscreenSaveButton" Content="Save" HorizontalAlignment="Right" Margin="0,0,95,45" Style="{DynamicResource ButtonFullscreenStyle}" VerticalAlignment="Bottom" Background="#FF3141A8" Foreground="#FFEEF0FF" Width="80" RenderTransformOrigin="0.5,0.5" Height="35" Click="SaveButton_Click" ToolTip="Save Map (Ctrl + S)" Visibility="Hidden"/>
+                    <Button x:Name="FullscreenUndoButton" Content="Undo" HorizontalAlignment="Left" Margin="10,0,0,45" Style="{DynamicResource ButtonFullscreenStyle}" VerticalAlignment="Bottom" Background="#FF3141A8" Foreground="#FFEEF0FF" Width="80" RenderTransformOrigin="0.5,0.5" Height="35" Click="UndoButton_Click" ToolTip="Undo (Ctrl+Z)" BorderBrush="{x:Null}" Visibility="Hidden"/>
+                    <xctk:ColorPicker x:Name="FullscreenColorPicker" Margin="0,0,330,45" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="98" Height="35" Background="#003141A8" DisplayColorAndName="True" SelectedColorChanged="ColorPicker_SelectedColorChanged" StandardColorsHeader="" SelectedColor="White" Padding="2" BorderBrush="White" Foreground="White" Visibility="Hidden"/>
+                    <Slider x:Name="FullscreenSizeSlider" HorizontalAlignment="Right" Margin="0,0,180,52" VerticalAlignment="Bottom" Width="145" Height="19" Foreground="White" BorderBrush="White" Background="#003141A8" Maximum="200" TickFrequency="5" Value="50" AutoToolTipPlacement="TopLeft" ValueChanged="SizeSlider_ValueChanged" Visibility="Hidden" />
+                    <Label x:Name="FullscreenLabel" Content="Sphere Radius" HorizontalAlignment="Right" Margin="0,0,180,71" VerticalAlignment="Bottom" Height="14" Width="145" VerticalContentAlignment="Center" FontSize="9.333" Padding="0" HorizontalContentAlignment="Center" Foreground="Black" Background="#FF3141A8" Visibility="Hidden" BorderThickness="0,0,0,45"/>
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </DockPanel>
+</Window>
