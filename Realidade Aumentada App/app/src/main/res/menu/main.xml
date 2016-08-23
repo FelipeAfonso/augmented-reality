@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+   <!--<item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />-->
+
+    <item
+        android:id="@+id/check_buy"
+        android:checkable="true"
+        app:showAsAction="never"
+        app:actionViewClass="android.widget.CheckBox"
+        android:title="Compra Rápida"/>
+
+    <item
+        android:id="@+id/check_rem"
+        android:checkable="true"
+        app:showAsAction="never"
+        app:actionViewClass="android.widget.CheckBox"
+        android:title="Remoção Rápida"/>
+
+    <!--<item
+        android:id="@+id/total_value"
+        app:showAsAction="always"
+        android:title="R$ 0.0"
+        />-->
+</menu>

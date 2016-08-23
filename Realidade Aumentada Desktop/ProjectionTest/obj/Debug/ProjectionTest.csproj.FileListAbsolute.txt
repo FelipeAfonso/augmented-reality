@@ -1,0 +1,234 @@
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\ProjectionTest.exe.config
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\ProjectionTest.exe.manifest
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\ProjectionTest.application
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\ProjectionTest.exe
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\ProjectionTest.pdb
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\Xceed.Wpf.DataGrid.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\obj\Debug\ProjectionTest.csprojResolveAssemblyReference.cache
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\obj\Debug\MainWindow.baml
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\obj\Debug\MainWindow.g.cs
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\obj\Debug\App.g.cs
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\obj\Debug\ProjectionTest_MarkupCompile.cache
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\obj\Debug\ProjectionTest.g.resources
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\obj\Debug\ProjectionTest.Properties.Resources.resources
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\obj\Debug\ProjectionTest.csproj.GenerateResource.Cache
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\obj\Debug\ProjectionTest.exe.manifest
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\obj\Debug\ProjectionTest.application
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\obj\Debug\ProjectionTest.exe
+C:\Users\Felipe\Documents\Repositório\augmented-reality\ProjectionTest\obj\Debug\ProjectionTest.pdb
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.config
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.pdb
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.manifest
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.application
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.pdb
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.DataGrid.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.Toolkit.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.csprojResolveAssemblyReference.cache
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\MainWindow.baml
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\MainWindow.g.cs
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\App.g.cs
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest_MarkupCompile.cache
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.g.resources
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.Properties.Resources.resources
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.csproj.GenerateResource.Cache
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe.manifest
+D:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.application
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.config
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.pdb
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.manifest
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.application
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.pdb
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.DataGrid.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.Toolkit.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.csprojResolveAssemblyReference.cache
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\MainWindow.baml
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\MainWindow.g.cs
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\App.g.cs
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest_MarkupCompile.cache
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.g.resources
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.Properties.Resources.resources
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.csproj.GenerateResource.Cache
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe.manifest
+J:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.application
+F:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.config
+F:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe
+F:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.pdb
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.config
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.pdb
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.manifest
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.application
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.pdb
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.DataGrid.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.Toolkit.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.csprojResolveAssemblyReference.cache
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\MainWindow.baml
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\MainWindow.g.cs
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\App.g.cs
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest_MarkupCompile.cache
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.g.resources
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.Properties.Resources.resources
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.csproj.GenerateResource.Cache
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe.manifest
+E:\IFSP\Iniciação Científica - Realidade Aumentada - Juliano\Primeiro Teste - Projetor\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.application
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.config
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.pdb
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.manifest
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.application
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.pdb
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.DataGrid.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.csprojResolveAssemblyReference.cache
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\MainWindow.baml
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\MainWindow.g.cs
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\App.g.cs
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest_MarkupCompile.cache
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.g.resources
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.Properties.Resources.resources
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.csproj.GenerateResource.Cache
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe.manifest
+C:\Users\Felipe\Desktop\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.application
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.config
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.pdb
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.manifest
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.application
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.pdb
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.DataGrid.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.Toolkit.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.csprojResolveAssemblyReference.cache
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\MainWindow.baml
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\MainWindow.g.cs
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\App.g.cs
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest_MarkupCompile.cache
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.g.resources
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.Properties.Resources.resources
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.csproj.GenerateResource.Cache
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe.manifest
+J:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.application
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.config
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.pdb
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe.manifest
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.application
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.exe
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ProjectionTest.pdb
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.DataGrid.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\Xceed.Wpf.Toolkit.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.csprojResolveAssemblyReference.cache
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\MainWindow.baml
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\MainWindow.g.cs
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\App.g.cs
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest_MarkupCompile.cache
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.g.resources
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.Properties.Resources.resources
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.csproj.GenerateResource.Cache
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.exe.manifest
+G:\SistemaRADesktop\ProjectionTest\ProjectionTest\obj\Debug\ProjectionTest.application
